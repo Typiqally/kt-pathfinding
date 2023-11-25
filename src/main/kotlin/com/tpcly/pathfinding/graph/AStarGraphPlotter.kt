@@ -6,6 +6,24 @@ import java.util.*
 class AStarGraphPlotter : GraphPlotter {
     override fun <TPosition> find(
         graph: Graph<TPosition>,
+        heuristic: (TPosition, TPosition) -> Double,
+        starts: List<TPosition>,
+        goals: List<TPosition>
+    ): Path<TPosition>? {
+        starts.forEach { start ->
+            goals.forEach { goal ->
+                val path = find(graph, heuristic, start, goal)
+                if (path != null) {
+                    return path
+                }
+            }
+        }
+
+        return null
+    }
+
+    override fun <TPosition> find(
+        graph: Graph<TPosition>,
         heuristic: (from: TPosition, to: TPosition) -> Double,
         start: TPosition,
         goal: TPosition
