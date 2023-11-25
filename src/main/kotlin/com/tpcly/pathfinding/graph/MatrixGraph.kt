@@ -22,7 +22,7 @@ class MatrixGraph(
             val x = position.x + deltaX
             val y = position.y + deltaY
 
-            if (x < 0 || x >= matrix.size || y < 0 || y >= matrix[0].size || matrix[x][y] == 1) {
+            if (x < 0 || x >= matrix.size || y < 0 || y >= matrix[0].size || !reachable(position)) {
                 return@forEach
             }
 
@@ -30,6 +30,10 @@ class MatrixGraph(
         }
 
         return neighbours
+    }
+
+    override fun reachable(position: Point2D): Boolean {
+        return matrix[position.x][position.y] == 0
     }
 
     override fun toString(): String = buildString {

@@ -40,6 +40,10 @@ class AStarGraphPlotter : GraphPlotter {
         start: Vertex<TPosition>,
         goal: Vertex<TPosition>
     ): Path<TPosition>? {
+        if (!graph.reachable(start.position) || !graph.reachable(goal.position)) {
+            return null
+        }
+
         val active = PriorityQueue<Vertex<TPosition>>()
         val explored = mutableListOf<TPosition>()
 
@@ -64,7 +68,6 @@ class AStarGraphPlotter : GraphPlotter {
                     current.weight.cost + graph.cost(neighbour, current.position),
                     heuristic(neighbour, goal.position)
                 )
-
 
                 if (!active.any { neighbour == it.position && weight.cost >= it.weight.cost }) {
                     active.add(Vertex(neighbour, weight, current))
