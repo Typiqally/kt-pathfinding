@@ -8,5 +8,5 @@ interface GraphPlotter {
         heuristic: (TPosition, TPosition) -> Double,
         start: TPosition,
         goal: TPosition
-    ): Path<TPosition>
+    ): Path<TPosition>?
 }

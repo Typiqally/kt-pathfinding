@@ -9,7 +9,7 @@ class AStarGraphPlotter : GraphPlotter {
         heuristic: (from: TPosition, to: TPosition) -> Double,
         start: TPosition,
         goal: TPosition
-    ): Path<TPosition> {
+    ): Path<TPosition>? {
         val startVertex = Vertex(start, Weight(0.0, 0.0))
         val goalVertex = Vertex(goal, Weight(0.0, 0.0))
 
@@ -21,7 +21,7 @@ class AStarGraphPlotter : GraphPlotter {
         heuristic: (TPosition, TPosition) -> Double,
         start: Vertex<TPosition>,
         goal: Vertex<TPosition>
-    ): Path<TPosition> {
+    ): Path<TPosition>? {
         val active = PriorityQueue<Vertex<TPosition>>()
         val explored = mutableListOf<TPosition>()
 
@@ -54,7 +54,7 @@ class AStarGraphPlotter : GraphPlotter {
             }
         }
 
-        throw UnsupportedOperationException("Path not found")
+        return null
     }
 
     private fun <TPosition> backtrack(from: Vertex<TPosition>): Path<TPosition> {
