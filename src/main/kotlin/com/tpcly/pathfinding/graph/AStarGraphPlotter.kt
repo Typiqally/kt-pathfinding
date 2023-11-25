@@ -11,8 +11,12 @@ class AStarGraphPlotter : GraphPlotter {
         goals: List<TPosition>
     ): Path<TPosition>? {
         starts.forEach { start ->
+            val startVertex = Vertex(start, Weight(0.0, 0.0))
+
             goals.forEach { goal ->
-                val path = find(graph, heuristic, start, goal)
+                val goalVertex = Vertex(goal, Weight(0.0, 0.0))
+
+                val path = find(graph, heuristic, startVertex, goalVertex)
                 if (path != null) {
                     return path
                 }
@@ -20,18 +24,6 @@ class AStarGraphPlotter : GraphPlotter {
         }
 
         return null
-    }
-
-    override fun <TPosition> find(
-        graph: Graph<TPosition>,
-        heuristic: (from: TPosition, to: TPosition) -> Double,
-        start: TPosition,
-        goal: TPosition
-    ): Path<TPosition>? {
-        val startVertex = Vertex(start, Weight(0.0, 0.0))
-        val goalVertex = Vertex(goal, Weight(0.0, 0.0))
-
-        return find(graph, heuristic, startVertex, goalVertex)
     }
 
     private fun <TPosition> find(

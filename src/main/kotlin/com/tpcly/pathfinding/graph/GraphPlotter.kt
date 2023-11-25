@@ -9,11 +9,4 @@ interface GraphPlotter {
         starts: List<TPosition>,
         goals: List<TPosition>
     ): Path<TPosition>?
-
-    fun <TPosition> find(
-        graph: Graph<TPosition>,
-        heuristic: (TPosition, TPosition) -> Double,
-        start: TPosition,
-        goal: TPosition
-    ): Path<TPosition>?
 }
